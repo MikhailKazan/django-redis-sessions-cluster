@@ -1,11 +1,11 @@
 import redis
-
+from rediscluster import RedisCluster
 try:
     from django.utils.encoding import force_unicode
 except ImportError:  # Python 3.*
     from django.utils.encoding import force_text as force_unicode
 from django.contrib.sessions.backends.base import SessionBase, CreateError
-from redis_sessions import settings
+from redis_cluster_sessions import settings
 
 
 class RedisServer():
@@ -34,6 +34,8 @@ class RedisServer():
                 self.connection_type = 'redis_unix_url'
             elif settings.SESSION_REDIS_HOST is not None:
                 self.connection_type = 'redis_host'
+            elif settings.SESSION_REDIS_CLUSTER_HOSTS is not None:
+                self.connection_type = 'cluster'
             
         self.connection_key += self.connection_type
 
@@ -93,6 +95,8 @@ class RedisServer():
                 db=settings.SESSION_REDIS_DB,
                 password=settings.SESSION_REDIS_PASSWORD,
             )
+        elif self.connection_type == 'cluster':
+            self.__redis[self.connection_key] = RedisCluster(startup_nodes=settings.SESSION_REDIS_CLUSTER_HOSTS, decode_responses=True)
 
         return self.__redis[self.connection_key]
 

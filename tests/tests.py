@@ -4,9 +4,9 @@ from random import randint
 
 from nose.tools import eq_, assert_false
 
-from redis_sessions.session import SessionStore
-from redis_sessions.session import RedisServer
-from redis_sessions import settings
+from redis_cluster_sessions.session import SessionStore
+from redis_cluster_sessions.session import RedisServer
+from redis_cluster_sessions import settings
 
 
 ##  Dev
@@ -76,7 +76,7 @@ def test_save_and_load():
 def test_with_redis_url_config():
     settings.SESSION_REDIS_URL = 'redis://localhost'
 
-    from redis_sessions.session import SessionStore
+    from redis_cluster_sessions.session import SessionStore
 
     redis_session = SessionStore()
     server = redis_session.server
@@ -177,7 +177,7 @@ def test_with_unix_url_config():
 
     #settings.SESSION_REDIS_URL = 'unix:///tmp/redis.sock'
 
-    #from redis_sessions.session import SessionStore
+    #from redis_cluster_sessions.session import SessionStore
 
     # redis_session = SessionStore()
     # server = redis_session.server

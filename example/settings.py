@@ -1,7 +1,7 @@
 import os
 import sys
 current_dir = lambda x: os.path.join(os.path.abspath(os.path.dirname(__file__)), x)
-sys.path.append('/home/martin/personal/django-redis-sessions/redis_sessions')
+sys.path.append('/home/martin/personal/django-redis-sessions/redis_cluster_sessions')
 
 
 DEBUG = True
@@ -30,7 +30,7 @@ MIDDLEWARE = [
 INSTALLED_APPS = (
     'django.contrib.sessions',
 )
-SESSION_ENGINE = 'redis_sessions.session'
+SESSION_ENGINE = 'redis_cluster_sessions.session'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (

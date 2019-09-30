@@ -3,6 +3,8 @@ from django.conf import settings
 # SESSION_REDIS - Default
 SESSION_REDIS = getattr(settings, 'SESSION_REDIS', {})
 
+SESSION_REDIS_CLUSTER_HOSTS = [SESSION_REDIS.get('cluster_hosts')]
+
 SESSION_REDIS_HOST = SESSION_REDIS.get('host', 'localhost')
 SESSION_REDIS_PORT = SESSION_REDIS.get('port', 6379)
 SESSION_REDIS_SOCKET_TIMEOUT = SESSION_REDIS.get('socket_timeout', 0.1)
@@ -18,6 +20,7 @@ SESSION_REDIS_URL = SESSION_REDIS.get('url', None)
 Should be on the format:
 [
     {
+        'cluster_hosts':[{'host': 'port'}]
         'host': 'localhost2',
         'port': 6379,
         'db': 0,
