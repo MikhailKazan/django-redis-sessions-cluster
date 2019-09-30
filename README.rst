@@ -1,7 +1,7 @@
-django-redis-sessions
+django-redis-sessions-cluster
 =====================
 
-Redis database backend for your sessions
+Redis Cluster database backend for your sessions
 
 |Build Status|
 
